@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chase — Folders</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1><svg style="width:.85em;height:.75em;vertical-align:-.1em" viewBox="0 0 20 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 5a1.5 1.5 0 0 1 1.5-1.5h5l2 2.5H17.5A1.5 1.5 0 0 1 19 7.5v6A1.5 1.5 0 0 1 17.5 15h-15A1.5 1.5 0 0 1 1 13.5V5z"/></svg> Folders</h1>
+        <button id="add-folder-btn" title="New folder">+</button>
+      </div>
+
+      <ul id="folder-list" class="folder-list"></ul>
+
+      <div id="no-folders" class="no-folders hidden">
+        <p>No folders yet.</p>
+        <p>Click <strong>+</strong> to create one.</p>
+      </div>
+
+      <div class="sidebar-footer">
+        <button id="export-btn" title="Export all folders and channels to a JSON file">⬇ Export</button>
+        <button id="import-btn" title="Import folders and channels from a JSON file">⬆ Import</button>
+        <input type="file" id="import-file" accept=".json" style="display:none">
+      </div>
+
+      <div class="sidebar-settings">
+        <div class="settings-header">Settings</div>
+        <label class="settings-label">Baserow API token
+          <input type="password" id="settings-token" class="settings-input" placeholder="Token…" autocomplete="off">
+        </label>
+        <label class="settings-label">Notes table ID
+          <input type="text" id="settings-notes-table" class="settings-input" placeholder="1128487">
+        </label>
+        <label class="settings-label">Seneca table ID
+          <input type="text" id="settings-seneca-table" class="settings-input" placeholder="1116959">
+        </label>
+        <button id="settings-save-btn" class="settings-save-btn">Save settings</button>
+        <div id="settings-status" class="settings-status hidden"></div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div id="placeholder" class="placeholder">
+        <div class="placeholder-icon"><svg width="48" height="48" viewBox="0 0 20 16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M1 5a1.5 1.5 0 0 1 1.5-1.5h5l2 2.5H17.5A1.5 1.5 0 0 1 19 7.5v6A1.5 1.5 0 0 1 17.5 15h-15A1.5 1.5 0 0 1 1 13.5V5z"/></svg></div>
+        <p>Select a folder to manage its channels.</p>
+      </div>
+
+      <div id="folder-panel" class="folder-panel hidden">
+        <div class="main-header">
+          <h2 id="panel-title"></h2>
+          <div class="main-actions">
+            <button id="add-channel-btn">+ Add channel</button>
+            <button id="rename-folder-btn" title="Rename folder">✏️ Rename</button>
+            <button id="delete-folder-btn" title="Delete folder" class="btn-danger">🗑 Delete</button>
+          </div>
+        </div>
+
+        <div id="channels-empty" class="channels-empty hidden">
+          <p>No channels in this folder.</p>
+          <p>Click <strong>+ Add channel</strong> or use the <em>Save to folder</em> button on any YouTube channel or video page.</p>
+        </div>
+
+        <ul id="channel-list" class="channel-list"></ul>
+      </div>
+    </main>
+  </div>
+
+  <!-- Add Channel Modal -->
+  <div id="modal-overlay" class="modal-overlay hidden">
+    <div class="modal">
+      <h3 id="modal-title">Add channel</h3>
+
+      <label>YouTube channel URL or @handle
+        <input type="text" id="modal-url" placeholder="https://youtube.com/@channelname or @handle">
+      </label>
+      <div id="modal-error" class="modal-error hidden"></div>
+
+      <div class="modal-actions">
+        <button id="modal-cancel" class="btn-secondary">Cancel</button>
+        <button id="modal-submit" class="btn-primary">Add</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="storage.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>
